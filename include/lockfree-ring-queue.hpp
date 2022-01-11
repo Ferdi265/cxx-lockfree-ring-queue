@@ -58,7 +58,7 @@ struct lockfree_ring_queue {
 
             std::optional<T> value;
             value = std::move(data[read_index % N].get());
-            data[read_index].destruct();
+            data[read_index % N].destruct();
 
             read_head.store(read_index + 1);
 
@@ -74,7 +74,7 @@ struct lockfree_ring_queue {
                 return false;
             }
 
-            data[write_index].construct(std::move(value));
+            data[write_index % N].construct(std::move(value));
 
             write_head.store(write_index + 1);
 
