@@ -23,8 +23,8 @@ struct lockfree_ring_queue {
         }
 
         ~lockfree_ring_queue() noexcept(std::is_nothrow_destructible_v<T>) {
-            for (size_t i = read_head.load(), end = write_head.load(); i < end; i++) {
-                data[i].destruct();
+            for (size_t i = read_head.load(), end = write_head.load(); i != end; i++) {
+                data[i % N].destruct();
             }
         }
 
