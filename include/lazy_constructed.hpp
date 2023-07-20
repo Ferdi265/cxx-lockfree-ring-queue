@@ -26,6 +26,22 @@ struct lazy_constructed {
             return reinterpret_cast<const T&>(storage);
         }
 
+        T& operator*() noexcept {
+            return get();
+        }
+
+        const T& operator*() const noexcept {
+            return get();
+        }
+
+        T* operator->() noexcept {
+            return &get();
+        }
+
+        const T* operator->() const noexcept {
+            return &get();
+        }
+
         template <typename... Args>
         void construct(Args&&... args) noexcept(std::is_nothrow_constructible_v<T, Args...>) {
             new (&storage) T(std::forward<Args>(args)...);
