@@ -7,7 +7,7 @@
 #include <optional>
 #include <type_traits>
 
-#include "lazy-constructed.hpp"
+#include "lazy_constructed.hpp"
 
 template <typename T, size_t N>
 struct lockfree_ring_queue {

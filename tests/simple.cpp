@@ -1,7 +1,7 @@
 #include <cassert>
 #include <optional>
 
-#include "lockfree-ring-queue.hpp"
+#include "lockfree_ring_queue.hpp"
 
 int main() {
     lockfree_ring_queue<int, 10> queue;
