@@ -15,6 +15,7 @@ struct lockfree_ring_queue {
         std::array<lazy_constructed<T>, N> data;
         std::atomic<size_t> write_head;
         std::atomic<size_t> read_head;
+        static_assert(std::atomic<size_t>::is_always_lock_free, "read and write head are not lock free");
 
     public:
         lockfree_ring_queue() noexcept {
